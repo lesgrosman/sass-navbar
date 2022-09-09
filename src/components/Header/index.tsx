@@ -2,31 +2,18 @@ import { useState, useEffect } from 'react'
 import classes from './Header.module.scss'
 import { BiMenuAltRight } from 'react-icons/bi'
 import { AiOutlineClose } from 'react-icons/ai'
+import { useWindowSize } from '../../utils/hooks/useWindowSize'
 
 const Header = () => {
+  const { width } = useWindowSize()
+
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const [size, setSize] = useState<{ windowWidth?: number }>({
-    windowWidth: undefined
-  })
-
   useEffect(() => {
-    const handleResize = () => {
-      setSize({windowWidth: window.innerWidth})
-    }
-
-    window.addEventListener('resize', handleResize)
-
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  useEffect(() => {
-    if ( size.windowWidth && size.windowWidth > 768 && isMenuOpen) {
+    if (width > 768 && isMenuOpen) {
       setIsMenuOpen(false)
     }
-  }, [isMenuOpen, size.windowWidth])
-
-
+  }, [isMenuOpen, width])
 
   return (
     <header className={classes.header}>
