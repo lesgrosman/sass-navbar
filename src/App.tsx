@@ -1,9 +1,11 @@
+import Layout from './components/Layout'
+import MainCore from './navigation/MainCore'
 
 const  App = () => {
   return (
-    <div>
-      App
-    </div>
+    <Layout>
+      <MainCore />
+    </Layout>
   )
 }
 
